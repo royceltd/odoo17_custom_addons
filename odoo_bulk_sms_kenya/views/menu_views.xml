@@ -34,6 +34,14 @@
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
+        <!-- Unified SMS Wizard Action -->
+        <record id="action_sms_unified_wizard" model="ir.actions.act_window">
+            <field name="name">Send Bulk SMS</field>
+            <field name="res_model">sms.unified.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
 
         <!-- Main Menu -->
         <menuitem id="menu_bulk_sms_main"
@@ -61,7 +69,7 @@
 
         <menuitem id="menu_sms_send_unified"
           name="Send SMS"
-          parent="menu_bulk_sms_send"
+          parent="menu_bulk_sms_main"
           action="action_sms_unified_wizard"
           sequence="10"/>
 
@@ -72,7 +80,7 @@
                   sequence="20"
                   groups="odoo_bulk_sms_kenya.group_sms_user"/>
 
-        <menuitem id="menu_sms_send_contacts"
+        <!-- <menuitem id="menu_sms_send_contacts"
                   name="Send to Contacts"
                   parent="menu_bulk_sms_send"
                   action="action_sms_contact_wizard"
@@ -82,7 +90,7 @@
                   name="Send to Employees"
                   parent="menu_bulk_sms_send"
                   action="action_sms_employee_wizard"
-                  sequence="20"/>
+                  sequence="20"/> -->
 
         <!-- Reports Submenu -->
         <menuitem id="menu_bulk_sms_reports"
