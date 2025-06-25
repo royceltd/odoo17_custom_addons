@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- SMS Log List View -->
+        <record id="view_sms_log_tree" model="ir.ui.view">
+            <field name="name">sms.log.tree</field>
+            <field name="model">sms.log</field>
+            <field name="arch" type="xml">
+                <tree string="SMS Log" decoration-success="status=='sent'" 
+                      decoration-danger="status=='failed'" decoration-info="status=='delivered'">
+                    <field name="name"/>
+                    <field name="recipient_name"/>
+                    <field name="phone_number"/>
+                    <field name="status"/>
+                    <field name="recipient_type"/>
+                    <field name="sent_date"/>
+                    <field name="template_id"/>
+                    <button name="retry_send" type="object" string="Retry" 
+                            icon="fa-refresh" invisible="status != 'failed'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- SMS Log Form View -->
+        <record id="view_sms_log_form" model="ir.ui.view">
+            <field name="name">sms.log.form</field>
+            <field name="model">sms.log</field>
+            <field name="arch" type="xml">
+                <form string="SMS Log" create="false">
+                    <header>
+                        <button name="retry_send" type="object" string="Retry Send" 
+                                class="btn-primary" invisible="status != 'failed'"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group name="recipient_info" string="Recipient Information">
+                                <field name="recipient_name"/>
+                                <field name="phone_number"/>
+                                <field name="recipient_type"/>
+                            </group>
+                            <group name="message_info" string="Message Information">
+                                <field name="sender_id"/>
+                                <field name="template_id"/>
+                                <field name="sent_date"/>
+                            </group>
+                        </group>
+                        <group string="Message Content">
+                            <field name="message" widget="text" readonly="1"/>
+                        </group>
+                        <group string="Error Information" invisible="status != 'failed'">
+                            <field name="error_message" widget="text" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SMS Log Search View -->
+        <record id="view_sms_log_search" model="ir.ui.view">
+            <field name="name">sms.log.search</field>
+            <field name="model">sms.log</field>
+            <field name="arch" type="xml">
+                <search string="SMS Log">
+                    <field name="name"/>
+                    <field name="recipient_name"/>
+                    <field name="phone_number"/>
+                    <field name="message"/>
+                    <separator/>
+                    <filter name="filter_sent" string="Sent" domain="[('status', '=', 'sent')]"/>
+                    <filter name="filter_failed" string="Failed" domain="[('status', '=', 'failed')]"/>
+                    <filter name="filter_delivered" string="Delivered" domain="[('status', '=', 'delivered')]"/>
+                    <separator/>
+                    <filter name="filter_today" string="Today" 
+                            domain="[('create_date', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                    <filter name="filter_week" string="This Week" 
+                            domain="[('create_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <group expand="1" string="Group By">
+                        <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                        <filter name="group_recipient_type" string="Recipient Type" context="{'group_by': 'recipient_type'}"/>
+                        <filter name="group_date" string="Date" context="{'group_by': 'create_date:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

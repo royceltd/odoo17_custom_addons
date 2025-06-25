@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sms_config_admin,sms.config.admin,model_sms_config,group_sms_admin,1,1,1,1
+access_sms_config_user,sms.config.user,model_sms_config,group_sms_user,1,0,0,0
+access_sms_template_admin,sms.royce.template.admin,model_sms_royce_template,group_sms_admin,1,1,1,1
+access_sms_template_user,sms.royce.template.user,model_sms_royce_template,group_sms_user,1,0,0,0
+access_sms_log_admin,sms.log.admin,model_sms_log,group_sms_admin,1,1,1,1
+access_sms_log_user,sms.log.user,model_sms_log,group_sms_user,1,0,0,0
+access_sms_contact_wizard_user,sms.contact.wizard.user,model_sms_contact_wizard,group_sms_user,1,1,1,1
+access_sms_employee_wizard_user,sms.employee.wizard.user,model_sms_employee_wizard,group_sms_user,1,1,1,1
+access_sms_unified_wizard_user,sms.unified.wizard.user,model_sms_unified_wizard,group_sms_user,1,1,1,1

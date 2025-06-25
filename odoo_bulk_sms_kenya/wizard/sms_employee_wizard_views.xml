@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+       <record id="view_sms_employee_wizard_form" model="ir.ui.view">
+    <field name="name">sms.employee.wizard.form</field>
+    <field name="model">sms.employee.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Send SMS to Employees">
+            <sheet>
+                <div class="oe_title">
+                    <h1>Send SMS to Employees</h1>
+                </div>
+                
+                <group>
+                    <group name="selection" string="Employee Selection">
+                        <field name="selection_type" widget="radio"/>
+                        <field name="employee_ids" widget="many2many_tags" 
+                               invisible="selection_type != 'selected'" 
+                               required="selection_type == 'selected'"/>
+                    </group>
+                    <group name="statistics" string="Statistics">
+                        <field name="total_employees" readonly="1"/>
+                        <field name="employees_with_phone" readonly="1"/>
+                    </group>
+                </group>
+
+                <group string="Message">
+                    <field name="template_id" placeholder="Select a template or enter custom message"/>
+                    <field name="custom_message" widget="text" 
+                           invisible="template_id != False"/>
+                </group>
+
+                <group string="Preview" invisible="message_preview == False">
+                    <field name="message_preview" widget="text" readonly="1"/>
+                </group>
+
+                <div class="alert alert-info" role="alert">
+                    <strong>Note:</strong> Only employees with valid phone numbers will receive SMS messages.
+                </div>
+            </sheet>
+            <footer>
+                <button name="send_sms" type="object" string="Send SMS" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+        <!-- Employee SMS Wizard Action -->
+        <record id="action_sms_employee_wizard" model="ir.actions.act_window">
+            <field name="name">Send SMS to Employees</field>
+            <field name="res_model">sms.employee.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Actions (moved here to fix loading order) -->
+        <record id="action_sms_config" model="ir.actions.act_window">
+            <field name="name">SMS Configuration</field>
+            <field name="res_model">sms.config</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_sms_template" model="ir.actions.act_window">
+            <field name="name">SMS Templates</field>
+            <field name="res_model">sms.template</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_sms_log" model="ir.actions.act_window">
+            <field name="name">SMS Log</field>
+            <field name="res_model">sms.log</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_sms_contact_wizard" model="ir.actions.act_window">
+            <field name="name">Send SMS to Contacts</field>
+            <field name="res_model">sms.contact.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_sms_employee_wizard" model="ir.actions.act_window">
+            <field name="name">Send SMS to Employees</field>
+            <field name="res_model">sms.employee.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Main Menu -->
+        <menuitem id="menu_bulk_sms_main"
+                  name="Bulk SMS"
+                  sequence="90"/>
+
+        <!-- Configuration Submenu -->
+        <menuitem id="menu_bulk_sms_config"
+                  name="Configuration"
+                  parent="menu_bulk_sms_main"
+                  sequence="10"
+                  groups="odoo_bulk_sms_kenya.group_sms_admin"/>
+
+        <menuitem id="menu_sms_config"
+                  name="SMS Settings"
+                  parent="menu_bulk_sms_config"
+                  action="action_sms_config"
+                  sequence="10"/>
+
+        <menuitem id="menu_sms_template"
+                  name="SMS Templates"
+                  parent="menu_bulk_sms_config"
+                  action="action_sms_template"
+                  sequence="20"/>
+
+        <menuitem id="menu_sms_send_unified"
+          name="Send SMS"
+          parent="menu_bulk_sms_send"
+          action="action_sms_unified_wizard"
+          sequence="10"/>
+
+        <!-- Send SMS Submenu -->
+        <menuitem id="menu_bulk_sms_send"
+                  name="Send SMS"
+                  parent="menu_bulk_sms_main"
+                  sequence="20"
+                  groups="odoo_bulk_sms_kenya.group_sms_user"/>
+
+        <menuitem id="menu_sms_send_contacts"
+                  name="Send to Contacts"
+                  parent="menu_bulk_sms_send"
+                  action="action_sms_contact_wizard"
+                  sequence="10"/>
+
+        <menuitem id="menu_sms_send_employees"
+                  name="Send to Employees"
+                  parent="menu_bulk_sms_send"
+                  action="action_sms_employee_wizard"
+                  sequence="20"/>
+
+        <!-- Reports Submenu -->
+        <menuitem id="menu_bulk_sms_reports"
+                  name="Reports"
+                  parent="menu_bulk_sms_main"
+                  sequence="30"
+                  groups="odoo_bulk_sms_kenya.group_sms_user"/>
+
+        <menuitem id="menu_sms_log"
+                  name="SMS Log"
+                  parent="menu_bulk_sms_reports"
+                  action="action_sms_log"
+                  sequence="10"/>
+
+    </data>
+</odoo>
