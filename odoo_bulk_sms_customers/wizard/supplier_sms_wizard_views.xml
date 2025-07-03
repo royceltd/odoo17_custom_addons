@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+
+        <!-- Supplier SMS Wizard Form View -->
+        <record id="view_supplier_sms_wizard_form" model="ir.ui.view">
+            <field name="name">supplier.sms.wizard.form</field>
+            <field name="model">supplier.sms.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Send SMS to Suppliers">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>🏭 Send SMS to Suppliers</h1>
+                            <p>Send bulk SMS messages to your suppliers</p>
+                        </div>
+                        
+                        <!-- Supplier Selection -->
+                        <group string="🎯 Supplier Selection">
+                            <group name="selection_type" string="Selection Method">
+                                <field name="selection_type" widget="radio"/>
+                            </group>
+                            <group name="statistics" string="Statistics">
+                                <field name="total_suppliers" readonly="1"/>
+                                <field name="suppliers_with_phone" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <!-- Specific Supplier Selection -->
+                        <group string="👥 Select Suppliers" 
+                               invisible="selection_type == 'all'">
+                            
+                            <field name="supplier_ids" 
+                                   widget="many2many_tags" 
+                                   placeholder="Select suppliers to send SMS to..."
+                                   invisible="selection_type != 'selected'"
+                                   required="selection_type == 'selected'"
+                                   options="{'no_create': True}"/>
+
+                            <field name="category_ids" 
+                                   widget="many2many_tags" 
+                                   placeholder="Select supplier categories..."
+                                   invisible="selection_type != 'category'"
+                                   required="selection_type == 'category'"
+                                   options="{'no_create': True}"/>
+                        </group>
+
+                        <!-- Message Composition -->
+                        <group string="✉️ Message Composition">
+                            <field name="template_id" 
+                                   placeholder="Select a template or enter custom message below"
+                                   options="{'no_create_edit': True}"/>
+                            <field name="custom_message" 
+                                   widget="text" 
+                                   placeholder="Enter your custom SMS message here..."
+                                   invisible="template_id != False"/>
+                        </group>
+
+                        <!-- Message Preview -->
+                        <div class="alert alert-success mt-3" 
+                             invisible="message_preview == False">
+                            <h5>👀 Message Preview</h5>
+                            <p><strong>Preview (with sample company "XYZ Suppliers Ltd"):</strong></p>
+                            <div class="border p-2 bg-light">
+                                <field name="message_preview" widget="text" readonly="1" nolabel="1"/>
+                            </div>
+                        </div>
+
+                        <!-- Information Box -->
+                        <div class="alert alert-info" role="alert">
+                            <h5>📋 Important Notes:</h5>
+                            <ul>
+                                <li><strong>Suppliers:</strong> Only companies marked as suppliers will be included</li>
+                                <li><strong>Phone Numbers:</strong> Only suppliers with mobile or phone numbers will receive SMS</li>
+                                <li><strong>Categories:</strong> Filter suppliers by their assigned categories</li>
+                                <li><strong>Templates:</strong> Use <code>${name}</code> for dynamic company names</li>
+                            </ul>
+                        </div>
+
+                    </sheet>
+                    <footer>
+                        <button name="send_sms" 
+                                type="object" 
+                                string="📤 Send SMS to Suppliers" 
+                                class="btn-primary"
+                                invisible="suppliers_with_phone == 0"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        
+                        <div class="alert alert-warning mt-2" 
+                             invisible="suppliers_with_phone > 0">
+                            <strong>⚠️ Cannot Send:</strong> No suppliers with valid phone numbers found.
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

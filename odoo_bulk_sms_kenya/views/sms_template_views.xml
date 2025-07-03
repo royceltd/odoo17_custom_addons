@@ -7,8 +7,8 @@
 
         <!-- SMS Template List View -->
         <record id="view_sms_template_tree" model="ir.ui.view">
-            <field name="name">sms.royce.template.tree</field>
-            <field name="model">sms.royce.template</field>
+            <field name="name">royce.sms.royce.template.tree</field>
+            <field name="model">royce.sms.royce.template</field>
             <field name="arch" type="xml">
                 <tree string="SMS Templates">
                     <field name="name"/>
@@ -22,8 +22,8 @@
         <!-- SMS Template Form View -->
        <!-- SMS Template Form View - FIXED VERSION -->
 <record id="view_sms_template_form" model="ir.ui.view">
-    <field name="name">sms.royce.template.form</field>
-    <field name="model">sms.royce.template</field>
+    <field name="name">royce.sms.royce.template.form</field>
+    <field name="model">royce.sms.royce.template</field>
     <field name="arch" type="xml">
         <form string="SMS Template">
             <sheet>
@@ -65,7 +65,7 @@
         <!-- SMS Template Action -->
         <record id="action_sms_template" model="ir.actions.act_window">
             <field name="name">SMS Templates</field>
-            <field name="res_model">sms.royce.template</field>
+            <field name="res_model">royce.sms.royce.template</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">

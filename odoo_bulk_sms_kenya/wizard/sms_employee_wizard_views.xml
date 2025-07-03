@@ -2,8 +2,8 @@
     <data>
 
        <record id="view_sms_employee_wizard_form" model="ir.ui.view">
-    <field name="name">sms.employee.wizard.form</field>
-    <field name="model">sms.employee.wizard</field>
+    <field name="name">royce.sms.employee.wizard.form</field>
+    <field name="model">royce.sms.employee.wizard</field>
     <field name="arch" type="xml">
         <form string="Send SMS to Employees">
             <sheet>
@@ -49,7 +49,7 @@
         <!-- Employee SMS Wizard Action -->
         <record id="action_sms_employee_wizard" model="ir.actions.act_window">
             <field name="name">Send SMS to Employees</field>
-            <field name="res_model">sms.employee.wizard</field>
+            <field name="res_model">royce.sms.employee.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

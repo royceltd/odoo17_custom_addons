@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 
 
 class SmsContactWizard(models.TransientModel):
-    _name = 'sms.contact.wizard'
+    _name = 'royce.sms.contact.wizard'
     _description = 'Send SMS to Contacts Wizard'
 
     selection_type = fields.Selection([

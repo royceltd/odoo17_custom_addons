@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 
 
 class SmsUnifiedWizard(models.TransientModel):
-    _name = 'sms.unified.wizard'
+    _name = 'royce.sms.unified.wizard'
     _description = 'Send SMS - Unified Wizard'
 
     # Step 1: Choose recipient type
@@ -26,7 +26,7 @@ class SmsUnifiedWizard(models.TransientModel):
     employee_ids = fields.Many2many('hr.employee', string='Select Employees')
     
     # Message configuration
-    template_id = fields.Many2one('sms.royce.template', 'SMS Template')
+    template_id = fields.Many2one('royce.sms.royce.template', 'SMS Template')
     custom_message = fields.Text('Custom Message')
     message_preview = fields.Text('Message Preview', readonly=True)
     
@@ -111,7 +111,7 @@ class SmsUnifiedWizard(models.TransientModel):
         # Send SMS to each recipient
         success_count = 0
         failed_count = 0
-        sms_log = self.env['sms.log']
+        sms_log = self.env['royce.sms.log']
 
         for recipient in valid_recipients:
             # Get phone number based on recipient type

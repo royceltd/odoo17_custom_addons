@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
 
-        <!-- SMS Log List View -->
-        <record id="view_sms_log_tree" model="ir.ui.view">
-            <field name="name">royce.sms.log.tree</field>
-            <field name="model">royce.sms.log</field>
+        <!-- Customer SMS Log Tree View -->
+        <record id="view_customer_sms_log_tree" model="ir.ui.view">
+            <field name="name">customer.sms.log.tree</field>
+            <field name="model">customer.sms.log</field>
             <field name="arch" type="xml">
-                <tree string="SMS Log" decoration-success="status=='sent'" 
+                <tree string="Customer SMS Log" decoration-success="status=='sent'" 
                       decoration-danger="status=='failed'" decoration-info="status=='delivered'">
-                    <field name="name"/>
-                    <field name="recipient_name"/>
+                    <field name="reference"/>
+                    <field name="partner_id"/>
+                    <field name="partner_type"/>
                     <field name="phone_number"/>
                     <field name="status"/>
-                    <field name="recipient_type"/>
                     <field name="sent_date"/>
                     <field name="template_id"/>
                     <button name="retry_send" type="object" string="Retry" 
@@ -22,12 +21,12 @@
             </field>
         </record>
 
-        <!-- SMS Log Form View -->
-        <record id="view_sms_log_form" model="ir.ui.view">
-            <field name="name">royce.sms.log.form</field>
-            <field name="model">royce.sms.log</field>
+        <!-- Customer SMS Log Form View -->
+        <record id="view_customer_sms_log_form" model="ir.ui.view">
+            <field name="name">customer.sms.log.form</field>
+            <field name="model">customer.sms.log</field>
             <field name="arch" type="xml">
-                <form string="SMS Log" create="false">
+                <form string="Customer SMS Log" create="false">
                     <header>
                         <button name="retry_send" type="object" string="Retry Send" 
                                 class="btn-primary" invisible="status != 'failed'"/>
@@ -35,20 +34,18 @@
                     </header>
                     <sheet>
                         <div class="oe_title">
-                            <h1>
-                                <field name="name"/>
-                            </h1>
+                            <h1><field name="reference"/></h1>
                         </div>
                         <group>
-                            <group name="recipient_info" string="Recipient Information">
-                                <field name="recipient_name"/>
+                            <group name="partner_info" string="Partner Information">
+                                <field name="partner_id"/>
+                                <field name="partner_type"/>
                                 <field name="phone_number"/>
-                                <field name="recipient_type"/>
                             </group>
                             <group name="message_info" string="Message Information">
-                                <field name="sender_id"/>
                                 <field name="template_id"/>
                                 <field name="sent_date"/>
+                                <field name="sms_log_id"/>
                             </group>
                         </group>
                         <group string="Message Content">
@@ -62,16 +59,19 @@
             </field>
         </record>
 
-        <!-- SMS Log Search View -->
-        <record id="view_sms_log_search" model="ir.ui.view">
-            <field name="name">royce.sms.log.search</field>
-            <field name="model">royce.sms.log</field>
+        <!-- Customer SMS Log Search View -->
+        <record id="view_customer_sms_log_search" model="ir.ui.view">
+            <field name="name">customer.sms.log.search</field>
+            <field name="model">customer.sms.log</field>
             <field name="arch" type="xml">
-                <search string="SMS Log">
-                    <field name="name"/>
-                    <field name="recipient_name"/>
+                <search string="Customer SMS Log">
+                    <field name="reference"/>
+                    <field name="partner_id"/>
                     <field name="phone_number"/>
                     <field name="message"/>
+                    <separator/>
+                    <filter name="filter_customers" string="Customers" domain="[('partner_type', '=', 'customer')]"/>
+                    <filter name="filter_suppliers" string="Suppliers" domain="[('partner_type', '=', 'supplier')]"/>
                     <separator/>
                     <filter name="filter_sent" string="Sent" domain="[('status', '=', 'sent')]"/>
                     <filter name="filter_failed" string="Failed" domain="[('status', '=', 'failed')]"/>
@@ -82,8 +82,8 @@
                     <filter name="filter_week" string="This Week" 
                             domain="[('create_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
                     <group expand="1" string="Group By">
+                        <filter name="group_partner_type" string="Partner Type" context="{'group_by': 'partner_type'}"/>
                         <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
-                        <filter name="group_recipient_type" string="Recipient Type" context="{'group_by': 'recipient_type'}"/>
                         <filter name="group_date" string="Date" context="{'group_by': 'create_date:day'}"/>
                     </group>
                 </search>

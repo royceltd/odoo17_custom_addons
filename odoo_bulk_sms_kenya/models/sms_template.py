@@ -3,7 +3,7 @@ import re
 
 
 class SmsTemplate(models.Model):
-    _name = 'sms.royce.template'
+    _name = 'royce.sms.royce.template'
     _description = 'SMS Template'
     _order = 'name'
 

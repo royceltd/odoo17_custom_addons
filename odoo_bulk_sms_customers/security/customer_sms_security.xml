@@ -1,0 +1,23 @@
+<!-- ====================================================================================
+     FILE: security/customer_sms_security.xml
+     ====================================================================================
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- Customer SMS Groups -->
+        <record id="group_customer_sms_user" model="res.groups">
+            <field name="name">Customer SMS User</field>
+            <field name="category_id" ref="base.module_category_sales"/>
+            <field name="comment">User can send SMS to customers and suppliers</field>
+        </record>
+
+        <record id="group_customer_sms_manager" model="res.groups">
+            <field name="name">Customer SMS Manager</field>
+            <field name="category_id" ref="base.module_category_sales"/>
+            <field name="implied_ids" eval="[(4, ref('group_customer_sms_user'))]"/>
+            <field name="comment">Manager can send SMS and access all customer SMS logs</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ====================================================================================
+     ROYCE SMS NOTIFICATION SYSTEM - VIEWS AND MENUS
+     Add these to your odoo_bulk_sms_customers module
+     ====================================================================================
+-->
+
+<!-- ====================================================================================
+     FILE: views/royce_sms_notification_template_views.xml
+     ====================================================================================
+-->
+<odoo>
+    <data>
+
+        <!-- Customer-Facing Templates Tree View -->
+        <record id="royce_view_customer_template_tree" model="ir.ui.view">
+            <field name="name">royce.sms.notification.template.customer.tree</field>
+            <field name="model">royce.sms.notification.template</field>
+            <field name="arch" type="xml">
+                <tree string="Customer SMS Templates">
+                    <field name="name"/>
+                    <field name="event_type"/>
+                    <field name="active"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Customer-Facing Templates Form View -->
+        <record id="royce_view_customer_template_form" model="ir.ui.view">
+            <field name="name">royce.sms.notification.template.customer.form</field>
+            <field name="model">royce.sms.notification.template</field>
+            <field name="arch" type="xml">
+                <form string="Customer SMS Template">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Template Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group name="template_info" string="Template Information">
+                                <field name="event_type"/>
+                                <field name="template_category" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Message Content" name="content">
+                                <group>
+                                    <field name="message_body" widget="text" 
+                                           placeholder="Enter your SMS message here. Use variables like ${customer_name}, ${amount}, ${order_number}"/>
+                                </group>
+                                <div class="alert alert-info" role="alert">
+                                    <h5><strong>Available Variables:</strong></h5>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul>
+                                                <li><code>[customer_name]</code> - Customer name</li>
+                                                <li><code>[supplier_name]</code> - Supplier name</li>
+                                                <li><code>[amount]</code> - Transaction amount</li>
+                                                <li><code>[order_number]</code> - Order number</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-6">
+                                            <ul>
+                                                <li><code>[invoice_number]</code> - Invoice number</li>
+                                                <li><code>[date]</code> - Current date</li>
+                                                <li><code>[company_name]</code> - Company name</li>
+                                                <li><code>[days_overdue]</code> - Days overdue</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </page>
+                            <page string="Preview" name="preview">
+                                <div class="alert alert-success">
+                                    <h5>👀 Template Preview</h5>
+                                    <p><strong>Preview with sample data:</strong></p>
+                                    <div class="border p-2 bg-light">
+                                        <field name="preview_text" widget="text" readonly="1" nolabel="1"/>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Internal Templates Tree View -->
+        <record id="royce_view_internal_template_tree" model="ir.ui.view">
+            <field name="name">royce.sms.notification.template.internal.tree</field>
+            <field name="model">royce.sms.notification.template</field>
+            <!-- <field name="domain">[('template_category', '=', 'internal_notification')]</field> -->
+            <field name="arch" type="xml">
+                <tree string="Internal SMS Templates">
+                    <field name="name"/>
+                    <field name="event_type"/>
+                    <field name="active"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Internal Templates Form View -->
+        <record id="royce_view_internal_template_form" model="ir.ui.view">
+            <field name="name">royce.sms.notification.template.internal.form</field>
+            <field name="model">royce.sms.notification.template</field>
+            <field name="arch" type="xml">
+                <form string="Internal SMS Template">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Template Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group name="template_info" string="Template Information">
+                                <field name="event_type"/>
+                                <field name="template_category" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Message Content" name="content">
+                                <group>
+                                    <field name="message_body" widget="text" 
+                                           placeholder="Enter internal notification message. Use variables for dynamic content."/>
+                                </group>
+                                <div class="alert alert-warning" role="alert">
+                                    <h5><strong>Internal Notifications:</strong></h5>
+                                    <p>These messages will be sent to:</p>
+                                    <ul>
+                                        <li><strong>Person who created the record</strong> (for all events)</li>
+                                        <li><strong>Company phone number</strong> (for overdue invoices and purchase orders)</li>
+                                    </ul>
+                                </div>
+                            </page>
+                            <page string="Preview" name="preview">
+                                <div class="alert alert-success">
+                                    <h5>👀 Template Preview</h5>
+                                    <p><strong>Preview with sample data:</strong></p>
+                                    <div class="border p-2 bg-light">
+                                        <field name="preview_text" widget="text" readonly="1" nolabel="1"/>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record id="royce_action_customer_templates" model="ir.actions.act_window">
+            <field name="name">Customer SMS Templates</field>
+            <field name="res_model">royce.sms.notification.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('template_category', '=', 'customer_facing')]</field>
+            <field name="context">{'default_template_category': 'customer_facing'}</field>
+            <field name="view_id" ref="royce_view_customer_template_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first customer SMS template!
+                </p>
+                <p>
+                    These templates will be sent directly to customers when specific events occur.
+                </p>
+            </field>
+        </record>
+
+        <record id="royce_action_internal_templates" model="ir.actions.act_window">
+            <field name="name">Internal SMS Templates</field>
+            <field name="res_model">royce.sms.notification.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('template_category', '=', 'internal_notification')]</field>
+            <field name="context">{'default_template_category': 'internal_notification'}</field>
+            <field name="view_id" ref="royce_view_internal_template_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first internal SMS template!
+                </p>
+                <p>
+                    These templates will be sent to internal users when events occur.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

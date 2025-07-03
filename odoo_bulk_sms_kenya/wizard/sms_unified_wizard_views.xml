@@ -8,8 +8,8 @@
 
         <!-- Unified SMS Wizard Form View -->
         <record id="view_sms_unified_wizard_form" model="ir.ui.view">
-            <field name="name">sms.unified.wizard.form</field>
-            <field name="model">sms.unified.wizard</field>
+            <field name="name">royce.sms.unified.wizard.form</field>
+            <field name="model">royce.sms.unified.wizard</field>
             <field name="arch" type="xml">
                 <form string="Send Bulk SMS">
                     <sheet>
@@ -127,7 +127,7 @@
         <!-- Unified SMS Wizard Action -->
         <record id="action_sms_unified_wizard" model="ir.actions.act_window">
             <field name="name">Send Bulk SMS</field>
-            <field name="res_model">sms.unified.wizard</field>
+            <field name="res_model">royce.sms.unified.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
             <field name="context">{}</field>

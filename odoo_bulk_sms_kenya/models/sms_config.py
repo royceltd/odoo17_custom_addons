@@ -3,7 +3,7 @@ from odoo.exceptions import ValidationError
 
 
 class SmsConfig(models.Model):
-    _name = 'sms.config'
+    _name = 'royce.sms.config'
     _description = 'SMS Configuration'
     _inherit = ['mail.thread', 'mail.activity.mixin']  # Add this line
     _rec_name = 'name'

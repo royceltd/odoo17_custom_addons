@@ -1,0 +1,47 @@
+
+<!-- ====================================================================================
+     FILE: views/royce_sms_notification_menu_views.xml
+     ====================================================================================
+-->
+<odoo>
+    <data>
+
+        <!-- SMS Notifications Main Menu -->
+        <menuitem id="royce_menu_sms_notifications_main"
+                  name="SMS Notifications"
+                  parent="menu_customer_sms_main"
+                  sequence="30"
+                  groups="group_customer_sms_user"/>
+
+        <!-- SMS Templates Submenu -->
+        <menuitem id="royce_menu_sms_templates"
+                  name="SMS Templates"
+                  parent="royce_menu_sms_notifications_main"
+                  sequence="10"/>
+
+        <menuitem id="royce_menu_customer_templates"
+                  name="Customer Templates"
+                  parent="royce_menu_sms_templates"
+                  action="royce_action_customer_templates"
+                  sequence="10"/>
+
+        <menuitem id="royce_menu_internal_templates"
+                  name="Internal Templates"
+                  parent="royce_menu_sms_templates"
+                  action="royce_action_internal_templates"
+                  sequence="20"/>
+
+        <!-- Notification Reports Submenu -->
+        <menuitem id="royce_menu_notification_reports"
+                  name="Notification Reports"
+                  parent="royce_menu_sms_notifications_main"
+                  sequence="20"/>
+
+        <menuitem id="royce_menu_notification_log"
+                  name="SMS Notification Log"
+                  parent="royce_menu_notification_reports"
+                  action="royce_action_notification_log"
+                  sequence="10"/>
+
+    </data>
+</odoo>

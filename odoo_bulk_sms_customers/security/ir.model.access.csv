@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_customer_sms_log_user,customer.sms.log.user,model_customer_sms_log,group_customer_sms_user,1,0,0,0
+access_customer_sms_log_manager,customer.sms.log.manager,model_customer_sms_log,group_customer_sms_manager,1,1,1,1
+access_customer_sms_wizard_user,customer.sms.wizard.user,model_customer_sms_wizard,group_customer_sms_user,1,1,1,1
+access_supplier_sms_wizard_user,supplier.sms.wizard.user,model_supplier_sms_wizard,group_customer_sms_user,1,1,1,1
+access_royce_sms_notification_template_user,royce.sms.notification.template.user,model_royce_sms_notification_template,group_customer_sms_user,1,0,0,0
+access_royce_sms_notification_template_manager,royce.sms.notification.template.manager,model_royce_sms_notification_template,group_customer_sms_manager,1,1,1,1
+access_royce_sms_notification_log_user,royce.sms.notification.log.user,model_royce_sms_notification_log,group_customer_sms_user,1,0,0,0
+access_royce_sms_notification_log_manager,royce.sms.notification.log.manager,model_royce_sms_notification_log,group_customer_sms_manager,1,1,1,1
+access_royce_sms_notification_service_user,royce.sms.notification.service.user,model_royce_sms_notification_service,group_customer_sms_user,1,1,1,0

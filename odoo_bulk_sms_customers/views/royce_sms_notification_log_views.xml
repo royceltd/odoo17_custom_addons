@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+
+        <!-- Notification Log Tree View -->
+        <record id="royce_view_notification_log_tree" model="ir.ui.view">
+            <field name="name">royce.sms.notification.log.tree</field>
+            <field name="model">royce.sms.notification.log</field>
+            <field name="arch" type="xml">
+                <tree string="SMS Notification Log" decoration-success="status=='sent'" 
+                      decoration-danger="status=='failed'">
+                    <field name="name"/>
+                    <field name="event_type"/>
+                    <field name="template_category"/>
+                    <field name="recipient_name"/>
+                    <field name="recipient_type"/>
+                    <field name="status"/>
+                    <field name="create_date" string="Sent Date"/>
+                    <field name="trigger_user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Notification Log Form View -->
+        <record id="royce_view_notification_log_form" model="ir.ui.view">
+            <field name="name">royce.sms.notification.log.form</field>
+            <field name="model">royce.sms.notification.log</field>
+            <field name="arch" type="xml">
+                <form string="SMS Notification Log" create="false">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group name="event_info" string="Event Information">
+                                <field name="event_type"/>
+                                <field name="template_category"/>
+                                <field name="trigger_user_id"/>
+                                <field name="template_id"/>
+                            </group>
+                            <group name="recipient_info" string="Recipient Information">
+                                <field name="recipient_name"/>
+                                <field name="recipient_type"/>
+                                <field name="recipient_phone"/>
+                            </group>
+                        </group>
+                        <group name="related_info" string="Related Record">
+                            <field name="related_model"/>
+                            <field name="related_record_name"/>
+                            <field name="sms_log_id"/>
+                        </group>
+                        <group string="Message Sent">
+                            <field name="message_sent" widget="text" readonly="1"/>
+                        </group>
+                        <group string="Error Information" invisible="status != 'failed'">
+                            <field name="error_message" widget="text" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Notification Log Search View -->
+        <record id="royce_view_notification_log_search" model="ir.ui.view">
+            <field name="name">royce.sms.notification.log.search</field>
+            <field name="model">royce.sms.notification.log</field>
+            <field name="arch" type="xml">
+                <search string="SMS Notification Log">
+                    <field name="name"/>
+                    <field name="recipient_name"/>
+                    <field name="event_type"/>
+                    <field name="trigger_user_id"/>
+                    <separator/>
+                    <filter name="royce_filter_customer_facing" string="Customer Messages" 
+                            domain="[('template_category', '=', 'customer_facing')]"/>
+                    <filter name="royce_filter_internal" string="Internal Messages" 
+                            domain="[('template_category', '=', 'internal_notification')]"/>
+                    <separator/>
+                    <filter name="royce_filter_sent" string="Sent" domain="[('status', '=', 'sent')]"/>
+                    <filter name="royce_filter_failed" string="Failed" domain="[('status', '=', 'failed')]"/>
+                    <separator/>
+                    <filter name="royce_filter_today" string="Today" 
+                            domain="[('create_date', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                    <filter name="royce_filter_week" string="This Week" 
+                            domain="[('create_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <group expand="1" string="Group By">
+                        <filter name="royce_group_event_type" string="Event Type" context="{'group_by': 'event_type'}"/>
+                        <filter name="royce_group_template_category" string="Template Category" context="{'group_by': 'template_category'}"/>
+                        <filter name="royce_group_recipient_type" string="Recipient Type" context="{'group_by': 'recipient_type'}"/>
+                        <filter name="royce_group_date" string="Date" context="{'group_by': 'create_date:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Notification Log Action -->
+        <record id="royce_action_notification_log" model="ir.actions.act_window">
+            <field name="name">SMS Notification Log</field>
+            <field name="res_model">royce.sms.notification.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_royce_filter_today': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No SMS notifications sent yet!
+                </p>
+                <p>
+                    This is where you'll see the log of all automatic SMS notifications sent by the system.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

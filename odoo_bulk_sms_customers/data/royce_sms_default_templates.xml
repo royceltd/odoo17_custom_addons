@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Customer-Facing Templates -->
+        <record id="royce_template_customer_welcome" model="royce.sms.notification.template">
+            <field name="name">Customer Welcome Message</field>
+            <field name="event_type">customer_created</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Welcome to ${company_name}! Dear ${customer_name}, thank you for joining us. We look forward to serving you. For support, contact us anytime.</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_customer_info_updated" model="royce.sms.notification.template">
+            <field name="name">Customer Info Updated Confirmation</field>
+            <field name="event_type">customer_updated</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Dear ${customer_name}, your account information has been successfully updated on ${date}. If you didn't make this change, please contact ${company_name} immediately.</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_invoice_generated" model="royce.sms.notification.template">
+            <field name="name">Invoice Generated Notification</field>
+            <field name="event_type">invoice_generated</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Dear ${customer_name}, your invoice ${invoice_number} for ${amount} has been generated. Please review and process payment. Thank you - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_payment_received" model="royce.sms.notification.template">
+            <field name="name">Payment Received Confirmation</field>
+            <field name="event_type">payment_received</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Dear ${customer_name}, we have received your payment of ${payment_amount}. Thank you for your prompt payment! - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_invoice_overdue" model="royce.sms.notification.template">
+            <field name="name">Invoice Overdue Reminder</field>
+            <field name="event_type">invoice_overdue</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Dear ${customer_name}, your invoice ${invoice_number} for ${amount} is ${days_overdue} days overdue. Please settle urgently to avoid service disruption. - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_supplier_welcome" model="royce.sms.notification.template">
+            <field name="name">Supplier Welcome Message</field>
+            <field name="event_type">supplier_created</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Welcome to ${company_name} supplier network! Dear ${supplier_name}, we're excited to work with you. Our procurement team will be in touch soon.</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_payment_made_supplier" model="royce.sms.notification.template">
+            <field name="name">Payment Made to Supplier</field>
+            <field name="event_type">payment_made_supplier</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Dear ${supplier_name}, we have processed payment of ${payment_amount} to your account on ${date}. Thank you for your service! - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Internal Notification Templates -->
+        <record id="royce_template_internal_customer_created" model="royce.sms.notification.template">
+            <field name="name">Internal: New Customer Alert</field>
+            <field name="event_type">customer_created</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">NEW CUSTOMER ALERT: ${customer_name} has been registered on ${date}. Please follow up for onboarding. - ${company_name} System</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_internal_payment_received" model="royce.sms.notification.template">
+            <field name="name">Internal: Payment Received Alert</field>
+            <field name="event_type">payment_received</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">PAYMENT RECEIVED: ${payment_amount} from ${customer_name} on ${date}. Please update customer account. - ${company_name} Finance</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_internal_invoice_overdue" model="royce.sms.notification.template">
+            <field name="name">Internal: Invoice Overdue Alert</field>
+            <field name="event_type">invoice_overdue</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">OVERDUE ALERT: Invoice ${invoice_number} from ${customer_name} is ${days_overdue} days overdue (${amount}). Immediate follow-up required! - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_internal_purchase_order" model="royce.sms.notification.template">
+            <field name="name">Internal: Purchase Order Created</field>
+            <field name="event_type">purchase_order_created</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">NEW PO CREATED: ${order_number} for ${supplier_name} worth ${amount} on ${date}. Please monitor delivery. - ${company_name} Procurement</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>
