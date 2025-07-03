@@ -42,7 +42,7 @@ class RoyceSmsNotificationLog(models.Model):
     
     # SMS sending information
     template_id = fields.Many2one('royce.sms.notification.template', 'Template Used')
-    sms_log_id = fields.Many2one('sms.log', 'SMS Log Reference')
+    sms_log_id = fields.Many2one('royce.sms.log', 'SMS Log Reference')
     status = fields.Selection([
         ('sent', 'Sent'),
         ('failed', 'Failed'),

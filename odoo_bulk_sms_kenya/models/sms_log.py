@@ -23,7 +23,7 @@ class SmsLog(models.Model):
     ], 'Status', default='draft')
     error_message = fields.Text('Error Message')
     sent_date = fields.Datetime('Sent Date')
-    template_id = fields.Many2one('sms.royce.template', 'Template Used')
+    template_id = fields.Many2one('royce.sms.royce.template', 'Template Used')
     recipient_type = fields.Selection([
         ('contact', 'Contact'),
         ('employee', 'Employee'),

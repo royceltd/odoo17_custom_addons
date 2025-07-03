@@ -18,7 +18,7 @@ class CustomerSmsWizard(models.TransientModel):
         domain=[('customer_rank', '>', 0)]
     )
     category_ids = fields.Many2many('res.partner.category', string='Customer Categories')
-    template_id = fields.Many2one('sms.royce.template', 'SMS Template')
+    template_id = fields.Many2one('royce.sms.royce.template', 'SMS Template')
     custom_message = fields.Text('Custom Message')
     message_preview = fields.Text('Message Preview', readonly=True)
     
@@ -89,7 +89,7 @@ class CustomerSmsWizard(models.TransientModel):
         # Send SMS to each customer using existing sms.log
         success_count = 0
         failed_count = 0
-        sms_log = self.env['sms.log']
+        sms_log = self.env['royce.sms.log']
         customer_sms_log = self.env['customer.sms.log']
 
         for customer in valid_customers:
