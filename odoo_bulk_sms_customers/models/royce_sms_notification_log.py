@@ -17,6 +17,14 @@ class RoyceSmsNotificationLog(models.Model):
         ('supplier_created', 'New Supplier Created'),
         ('purchase_order_created', 'Purchase Order Created'),
         ('payment_made_supplier', 'Payment Made to Supplier'),
+
+         # ADD THESE NEW SALES EVENTS:
+    ('quotation_sent', 'Quotation Sent'),
+    ('sale_order_confirmed', 'Sales Order Confirmed'),
+    ('delivery_scheduled', 'Delivery Scheduled'),
+    ('goods_shipped', 'Goods Shipped'),
+    ('delivery_completed', 'Delivery Completed'),
+    ('delivery_delayed', 'Delivery Delayed'),
     ], 'Event Type', required=True)
     
     template_category = fields.Selection([

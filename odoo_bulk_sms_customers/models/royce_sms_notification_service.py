@@ -61,6 +61,14 @@ class RoyceSmsNotificationService(models.Model):
                 recipient_phone = supplier.mobile or supplier.phone
                 recipient_name = supplier.name
                 recipient_type = 'supplier'
+        elif template.event_type in ['quotation_sent', 'sale_order_confirmed', 'delivery_scheduled', 
+                                   'goods_shipped', 'delivery_completed']:
+            # NEW: Sales events - send to customer
+            if 'customer_id' in context_data:
+                customer = self.env['res.partner'].browse(context_data['customer_id'])
+                recipient_phone = customer.mobile or customer.phone
+                recipient_name = customer.name
+                recipient_type = 'customer'
         
         if not recipient_phone:
             return {'success': False, 'error': 'No recipient phone found'}

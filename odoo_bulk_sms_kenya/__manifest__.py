@@ -17,8 +17,8 @@
         
         API Integration: https://roycebulksms.com/send-message
     ''',
-    'author': 'Your Company',
-    'website': 'https://www.yourcompany.com',
+    'author': 'Royce Technologies Ltd',
+    'website': 'https://roycetechnologies.co.ke',
     'depends': ['base', 'contacts', 'hr'],
     'data': [
         'security/sms_security.xml',

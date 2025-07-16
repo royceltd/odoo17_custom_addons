@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Customer-Facing Sales Templates -->
+        <record id="royce_template_quotation_sent" model="royce.sms.notification.template">
+            <field name="name">Quotation Sent to Customer</field>
+            <field name="event_type">quotation_sent</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Your quote ${quote_number} for ${amount} is ready. Valid until ${delivery_date}. Questions? Contact us! - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_sale_order_confirmed" model="royce.sms.notification.template">
+            <field name="name">Sales Order Confirmed</field>
+            <field name="event_type">sale_order_confirmed</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Order ${order_number} confirmed! Expected delivery: ${delivery_date}. Track your order online. Thank you! - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_delivery_scheduled" model="royce.sms.notification.template">
+            <field name="name">Delivery Scheduled</field>
+            <field name="event_type">delivery_scheduled</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Your order ${order_number} will be delivered on ${delivery_date} between 9AM-5PM. Please be available. - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_goods_shipped" model="royce.sms.notification.template">
+            <field name="name">Goods Shipped</field>
+            <field name="event_type">goods_shipped</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Your order ${order_number} has shipped! Tracking: ${tracking_number}. Expected delivery: ${delivery_date}. - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_delivery_completed" model="royce.sms.notification.template">
+            <field name="name">Delivery Completed</field>
+            <field name="event_type">delivery_completed</field>
+            <field name="template_category">customer_facing</field>
+            <field name="message_body">Order ${order_number} delivered! Thank you for choosing ${company_name}. Rate your experience and order again soon!</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Internal Sales Notification Templates -->
+        <record id="royce_template_internal_quotation_sent" model="royce.sms.notification.template">
+            <field name="name">Internal: Quotation Sent Alert</field>
+            <field name="event_type">quotation_sent</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">QUOTE SENT: ${quote_number} for ${amount} to ${customer_name} by ${salesperson_name}. Follow up in 2 days. - ${company_name} Sales</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_internal_sale_confirmed" model="royce.sms.notification.template">
+            <field name="name">Internal: Sales Order Confirmed</field>
+            <field name="event_type">sale_order_confirmed</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">ORDER CONFIRMED: ${order_number} for ${amount} from ${customer_name}. Delivery scheduled: ${delivery_date}. Great job ${salesperson_name}! - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_internal_delivery_delayed" model="royce.sms.notification.template">
+            <field name="name">Internal: Delivery Delayed Alert</field>
+            <field name="event_type">delivery_delayed</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">DELIVERY DELAY: Order ${order_number} to ${customer_name} delayed. Expected: ${expected_date}. Contact customer ASAP! - ${company_name} Operations</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="royce_template_internal_delivery_completed" model="royce.sms.notification.template">
+            <field name="name">Internal: Delivery Completed Alert</field>
+            <field name="event_type">delivery_completed</field>
+            <field name="template_category">internal_notification</field>
+            <field name="message_body">DELIVERY DONE: Order ${order_number} to ${customer_name} completed successfully on ${delivery_date}. Customer satisfaction check needed. - ${company_name}</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>

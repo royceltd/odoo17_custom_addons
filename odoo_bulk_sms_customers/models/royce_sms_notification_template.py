@@ -17,6 +17,13 @@ class RoyceSmsNotificationTemplate(models.Model):
         ('supplier_created', 'New Supplier Created'),
         ('purchase_order_created', 'Purchase Order Created'),
         ('payment_made_supplier', 'Payment Made to Supplier'),
+        # Sales related events
+        ('quotation_sent', 'Quotation Sent'),
+        ('sale_order_confirmed', 'Sales Order Confirmed'),
+        ('delivery_scheduled', 'Delivery Scheduled'),
+        ('goods_shipped', 'Goods Shipped'),
+        ('delivery_completed', 'Delivery Completed'),
+        ('delivery_delayed', 'Delivery Delayed'),
     ], 'Event Type', required=True)
     
     template_category = fields.Selection([
@@ -74,6 +81,28 @@ class RoyceSmsNotificationTemplate(models.Model):
             return ''
         
         rendered_message = template_body
+        replacements = {
+            # Customer/Supplier Variables
+            '[customer_name]': context_data.get('customer_name', ''),
+            '[supplier_name]': context_data.get('supplier_name', ''),
+            '[amount]': context_data.get('amount', ''),
+            '[order_number]': context_data.get('order_number', ''),
+            '[invoice_number]': context_data.get('invoice_number', ''),
+            '[date]': context_data.get('date', ''),
+            '[company_name]': context_data.get('company_name', 'Roycelt'),
+            '[payment_amount]': context_data.get('payment_amount', ''),
+            '[days_overdue]': context_data.get('days_overdue', ''),
+            
+            # NEW: Sales Variables
+            '[quote_number]': context_data.get('quote_number', ''),
+            '[delivery_date]': context_data.get('delivery_date', ''),
+            '[tracking_number]': context_data.get('tracking_number', ''),
+            '[salesperson_name]': context_data.get('salesperson_name', ''),
+            '[product_name]': context_data.get('product_name', ''),
+            '[quantity]': context_data.get('quantity', ''),
+            '[delivery_address]': context_data.get('delivery_address', ''),
+            '[expected_date]': context_data.get('expected_date', ''),
+        }
         for key, value in context_data.items():
             if value is not None:
                 rendered_message = rendered_message.replace(f'${{{key}}}', str(value))

@@ -1,389 +1,783 @@
-
-<div class="container" style="padding: 1rem !important; margin-bottom: 1rem !important;">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-between"
-            style="border-bottom: 1px solid #d5d5d5;">
-            <div class="my-3">
-                <img src="icon.png" style="width: auto !important; height: 40px !important;">
-            </div>
-            <div class="my-3 d-flex align-items-center">
-                <div
-                    style="background-color: #7C7BAD !important; color: #fff !important; font-weight: 600 !important; padding: 5px 15px 8px !important; margin: 0 5px !important;">
-                    <i class="fa fa-check mr-1"></i>Community
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royce Bulk SMS Kenya - Odoo 17 Module</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #714B67;
+            --secondary-color: #7C7BAD;
+            --accent-color: #013d3b;
+            --light-bg: #f5f2f5;
+            --text-dark: #282F33;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #025b58 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .badge-featured {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-card {
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 120px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            border: 2px solid transparent;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(113, 75, 103, 0.15);
+            border-color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-card p {
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .section-header {
+            border-bottom: 2px solid #e9ecef;
+            margin: 3rem 0 2rem 0;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .feature-item {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .code-block .comment {
+            color: #68d391;
+        }
+        
+        .code-block .string {
+            color: #fbb6ce;
+        }
+        
+        .code-block .keyword {
+            color: #63b3ed;
+        }
+        
+        .installation-step {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .screenshot-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, #4d4d4d 0%, #333 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .whatsapp-card {
+            background: linear-gradient(135deg, #25D366 0%, #1ebe57 100%);
+        }
+        
+        .alert-info {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 1px solid #b6d7a8;
+            color: #155724;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .table-responsive {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .table th {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .table td {
+            border-top: 1px solid #e9ecef;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="container-fluid" style="padding: 1rem; margin-bottom: 1rem;">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-between align-items-center" style="border-bottom: 1px solid #d5d5d5;">
+                <div class="my-3">
+                    <img src="icon.png" style="width: auto; height: 40px;">
+                </div>
+                <div class="my-3">
+                    <span class="badge-featured">
+                        <i class="fa fa-check mr-1"></i>Royce Bulk SMS Kenya
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container" style="padding: 0rem 1.5rem 4rem !important">
-    <div class="row" style="height: 350px !important;">
-        <div class="col-sm-12 col-md-12 col-lg-12"
-            style="padding: 4rem 1rem !important; background-color: #013d3b !important; border-radius: 20px !important;">
-
-                                        <img class="col-sm-12 col-md-12 col-lg-12" src="assets/screen.jpg"/>
-
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12" style="border-bottom: 1px solid #d5d5d5 !important; margin-bottom: 2rem !important">
-            <h2
-                style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.5rem !important;">
-                <i class="fa fa-compass mr-2"></i>Explore this module
-            </h2>
-        </div>
-        <div class="col-md-6">
-            <a href="#overview" style="text-decoration: none !important;">
-                <div class="row"
-                    style="background-color: #f5f2f5 !important; border-radius: 10px !important; margin: 1rem !important; padding: 1.5em !important; height: 100px !important;">
-                    <div class="col-8">
-                        <h3 style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.2rem !important;">
-                            Overview</h3>
-                        <p
-                            style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #714B67 !important; font-size: 0.9rem !important;">
-                            Learn more about this module</p>
-                    </div>
-                    <div class="col-4 text-right d-flex justify-content-end align-items-center">
-                        <i class="fa fa-chevron-right" style="color: #714B67 !important;"></i>
+    <div class="container" style="padding: 0 1.5rem 4rem;">
+        <!-- Hero Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Bulk SMS for Odoo 17</h1>
+                        <p class="hero-subtitle">
+                            Professional SMS integration module with advanced features for your Odoo ERP system
+                        </p>
+                        <div class="d-flex justify-content-center flex-wrap gap-3">
+                            <span class="badge badge-light p-2"><i class="fa fa-mobile mr-1"></i> Easy Integration</span>
+                            <span class="badge badge-light p-2"><i class="fa fa-database mr-1"></i> Message Logging</span>
+                            <span class="badge badge-light p-2"><i class="fa fa-chart-line mr-1"></i> Delivery Tracking</span>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
-        <div class="col-md-6">
-            <a href="#features" style="text-decoration: none !important;">
-                <div class="row"
-                    style="background-color: #f5f2f5 !important; border-radius: 10px !important; margin: 1rem !important; padding: 1.5em !important; height: 100px !important;">
-                    <div class="col-8">
-                        <h3
-                            style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.2rem !important;">
-                            Features</h3>
-                        <p
-                            style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #714B67 !important; font-size: 0.9rem !important;">
-                            View features of this module</p>
+        
+        <!-- Navigation Cards -->
+        <div class="row mb-5">
+            <div class="col-md-4 mb-3">
+                <a href="#overview" class="nav-card">
+                    <div class="d-flex align-items-center h-100">
+                        <div class="flex-grow-1">
+                            <h3><i class="fa fa-info-circle mr-2"></i>Overview</h3>
+                            <p>Learn about module capabilities and features</p>
+                        </div>
+                        <i class="fa fa-chevron-right ml-3" style="color: var(--primary-color);"></i>
                     </div>
-                    <div class="col-4 text-right d-flex justify-content-end align-items-center">
-                        <i class="fa fa-chevron-right" style="color: #714B67 !important;"></i>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="#installation" class="nav-card">
+                    <div class="d-flex align-items-center h-100">
+                        <div class="flex-grow-1">
+                            <h3><i class="fa fa-download mr-2"></i>Installation</h3>
+                            <p>Step-by-step setup and configuration guide</p>
+                        </div>
+                        <i class="fa fa-chevron-right ml-3" style="color: var(--primary-color);"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="#usage" class="nav-card">
+                    <div class="d-flex align-items-center h-100">
+                        <div class="flex-grow-1">
+                            <h3><i class="fa fa-code mr-2"></i>Usage & API</h3>
+                            <p>Code examples and implementation guide</p>
+                        </div>
+                        <i class="fa fa-chevron-right ml-3" style="color: var(--primary-color);"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="row" id="overview">
+            <div class="col-12">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fa fa-info-circle"></i>Overview
+                    </h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-8">
+                        <p class="lead">
+                            The Royce Bulk SMS module provides a comprehensive SMS integration solution for Odoo 17, 
+                            enabling businesses to send bulk SMS messages directly from their ERP system with advanced 
+                            tracking and management capabilities.
+                        </p>
+                        
+                        <div class="alert-info">
+                            <strong><i class="fa fa-lightbulb mr-2"></i>Quick Start:</strong>
+                            Create a free account at <a href="http://roycebulksms.com" target="_blank">Royce BulkSMS</a>, 
+                            generate an API key, and configure it in your Odoo settings to start sending SMS immediately.
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="screenshot-container">
+                            <img src="assets/template.png" alt="SMS Template Interface" style="max-height: 200px;">
+                            <small class="text-muted d-block">SMS Template Management</small>
+                        </div>
                     </div>
                 </div>
-            </a>
-        </div>
-        <div class="col-md-6">
-            <a href="#screenshots" style="text-decoration: none !important;">
-                <div class="row"
-                    style="background-color: #f5f2f5 !important; border-radius: 10px !important; margin: 1rem !important; padding: 1.5em !important; height: 100px !important;">
-                    <div class="col-8">
-                        <h3
-                            style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.2rem !important;">
-                            Screenshots</h3>
-                        <p
-                            style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #714B67 !important; font-size: 0.9rem !important;">
-                            See key screenshots of this module</p>
+
+                <!-- Key Features -->
+                <h3 class="mt-4 mb-3" style="color: var(--primary-color);">Key Capabilities</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="feature-item">
+                            <div class="d-flex">
+                                <div class="feature-icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: var(--primary-color);">Multi-Entity SMS</h5>
+                                    <p class="mb-0">Send SMS to customers, suppliers, contacts, and employees from any Odoo model.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4 text-right d-flex justify-content-end align-items-center">
-                        <i class="fa fa-chevron-right" style="color: #714B67 !important;"></i>
+                    <div class="col-md-6">
+                        <div class="feature-item">
+                            <div class="d-flex">
+                                <div class="feature-icon">
+                                    <i class="fa fa-database"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: var(--primary-color);">Message Logging</h5>
+                                    <p class="mb-0">Complete SMS history with delivery status tracking and audit trail.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item">
+                            <div class="d-flex">
+                                <div class="feature-icon">
+                                    <i class="fa fa-paper-plane"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: var(--primary-color);">Outbox Management</h5>
+                                    <p class="mb-0">Intuitive interface for viewing and managing sent messages.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item">
+                            <div class="d-flex">
+                                <div class="feature-icon">
+                                    <i class="fa fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <h5 style="color: var(--primary-color);">Delivery Tracking</h5>
+                                    <p class="mb-0">Real-time delivery status updates via callback URLs.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </a>
-        </div>
-
-
-    <div class="row" id="overview">
-        <div class="col-md-12" style="border-bottom: 1px solid #d5d5d5 !important; margin: 2rem 0 !important">
-            <h2
-                style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.5rem !important;">
-                <i class="fa fa-pie-chart mr-2"></i>Overview
-            </h2>
-        </div>
-
-        <div class="col-mg-12 pl-3">
-            <p
-                style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important; line-height: 30px !important;">
-                This package provides an easy interface for sending SMS in your laravel application.
-                Open a free account [Royce BulkSMS](http://bulksms.roycetechnologies.co.ke), under API menu click generate API.
-                Copy the API key and paste it in your .env file
-                </p>
-
-        </div>
-    </div>
-
-    <div class="row" id="features">
-        <div class="col-md-12" style="border-bottom: 1px solid #d5d5d5 !important; margin: 2rem 0 !important">
-            <h2
-                style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.5rem !important;">
-                <i class="fa fa-star mr-2"></i>Features
-            </h2>
-        </div>
-
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Simple UI</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Provide an easy interface for sending bulk sms.</p>
-            </div>
-        </div>
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Data storage</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Provides a database table for storing sent text.</p>
             </div>
         </div>
 
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Outbox</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    An interface for viewing sent text (outbox).</p>
-            </div>
-        </div>
+        <!-- Installation Section -->
+        <div class="row" id="installation">
+            <div class="col-12">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fa fa-download"></i>Installation & Setup
+                    </h2>
+                </div>
 
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Callback URL</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Provide a callback URL you add to your bulksms account.<br>
-                    This will ensure that you receive delivery status back to your application (_coming soon_)</p>
-            </div>
-        </div>
+                <h3 class="mb-4" style="color: var(--primary-color);">Module Installation</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="installation-step">
+                            <div class="d-flex align-items-center">
+                                <div class="step-number">1</div>
+                                <div>
+                                    <h5 class="mb-1">Download Module</h5>
+                                    <p class="mb-0">Place the module in your Odoo addons folder</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="installation-step">
+                            <div class="d-flex align-items-center">
+                                <div class="step-number">2</div>
+                                <div>
+                                    <h5 class="mb-1">Update App List</h5>
+                                    <p class="mb-0">Go to Apps menu and update the applications list</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="installation-step">
+                            <div class="d-flex align-items-center">
+                                <div class="step-number">3</div>
+                                <div>
+                                    <h5 class="mb-1">Install Module</h5>
+                                    <p class="mb-0">Search for "Bulk SMS" and click Install</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
-            <div class="row" id="installation">
-            <div class="col-md-12" style="border-bottom: 1px solid #d5d5d5 !important; margin: 2rem 0 !important">
-                <h2 style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.5rem !important;">
-                    <i class="fa fa-cogs mr-2"></i>Installation.
-
-                </h2>
-            </div>
-
-        <div class="col-md-6 pl-3 py-3 d-flex">
-               <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    1</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Download this app and put it in your addons folder
-                </p>
-            </div>
-        </div>
-
-        <div class="col-md-6 pl-3 py-3 d-flex">
-                           <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    2</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Go to  app and search for Bulk sms
-                </p>
-            </div>
-        </div>
-         <div class="col-md-6 pl-3 py-3 d-flex">
-                            <div>
-                <img src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    3</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Install the module
-                </p>
-            </div>
-        </div>
-
-        </div>
-
-    <div class="row" id="integration">
-            <div class="col-md-12" style="border-bottom: 1px solid #d5d5d5 !important; margin: 2rem 0 !important">
-                <h2 style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.5rem !important;">
-                    <i class="fa fa-cogs mr-2"></i>Integration.
-
-                </h2>
-            </div>
-
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img style="width:64px;height:64px" src="assets/install.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Installation</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    1. Just Install the module.</p>
-            </div>
-        </div>
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img style="width:64px;height:64px" src="assets/account.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Account</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    2. Open a free account at Royce bulk sms.</p>
-            </div>
-        </div>
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img style="width:64px;height:64px" src="assets/api.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    API</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    3. Generate an API key and put under config~API key.</p>
-            </div>
-        </div>
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img style="width:64px;height:64px" src="assets/senderid.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Sender ID</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                     4. Add RoyceLTD as your default sender ID. Under config sender ID.</p>
-            </div>
-        </div>
-        </div>
-            <div class="row" id="usage">
-            <div class="col-md-12" style="border-bottom: 1px solid #d5d5d5 !important; margin: 2rem 0 !important">
-                <h2 style="font-family: 'Montserrat', sans-serif !important; font-weight: 600 !important; color: #714B67 !important; font-size: 1.5rem !important;">
-                    <i class="fa fa-cogs mr-2"></i>How to use.
-
-                </h2>
-            </div>
-        <div class="col-md-6 pl-3 py-3 d-flex">
-               <div>
-                <img style="width:64px;height:64px" src="assets/tick.png">
-            </div>
-            <div>
-                <h4 style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Under bulksms > send sms > send a text message</h4>
-            </div>
-        </div>
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img style="width:64px;height:64px" src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    How to use from other models</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    Search send.text model and sendCustomText with mobile number,text message, sender id parameters</p>
-            </div>
-        </div>
-
-        <div class="col-md-6 pl-3 py-3 d-flex">
-            <div>
-                <img style="width:64px;height:64px" src="assets/tick.png">
-            </div>
-            <div>
-                <h4
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 600 !important; color: #282F33 !important; font-size: 1.3rem !important;">
-                    Sample code when sending from other models</h4>
-                <p
-                    style="font-family: 'Roboto', sans-serif !important; font-weight: 400 !important; color: #282F33 !important; font-size: 1rem !important;">
-                    self.env['send.text'].sendCustomText('0713727937','We have received your payment, receipt number RCP0022 ','RoyceLtd')
-   
-                </p>
-            </div>
-        </div>
-
-        </div>
-    <!-- FOOTER -->
-    <!-- Footer Section -->
-    <section class="container" style="margin: 5rem auto 2rem;">
-        <div class="row" style="max-width:1540px;">
-            <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center">
-                <h2 style="color: #212529 !important;">Need Help?</h2>
-                <hr
-                    style="border: 3px solid #714B67 !important; background-color: #714B67 !important; width: 80px !important; margin-bottom: 2rem !important;" />
-            </div>
-        </div>
-
-        <!-- Contact Cards -->
-        <div class="row d-flex justify-content-center align-items-center"
-            style="max-width:1540px; margin: 0 auto 2rem auto;">
-
-            <div class="col-lg-12" style="padding: 0rem 3rem 2rem; border-radius: 10px; margin-right: 3rem; ">
-
-                <div class="row mt-4">
+                <h3 class="mt-5 mb-4" style="color: var(--primary-color);">Service Configuration</h3>
+                <div class="row">
                     <div class="col-lg-6">
-                        <a href="support@roycetechnologies.co.ke" target="_blank" class="btn btn-block mb-2 deep_hover"
-                            style="text-decoration: none;  background-color: #4d4d4d; color: #FFF;  border-radius: 4px;"><i
-                                class="fa fa-envelope mr-2"></i>support@roycetechnologies.co.ke</a>
+                        <div class="installation-step">
+                            <div class="d-flex align-items-start">
+                                <div style="background: var(--secondary-color); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">
+                                    <i class="fa fa-user-plus"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Create Account</h5>
+                                    <p class="mb-2">Register at <a href="http://roycebulksms.com" target="_blank">Royce BulkSMS</a> for your free account</p>
+                                    <small class="text-muted">No credit card required for testing</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6">
-                        <a href="https://api.whatsapp.com/send?phone=254713727937" target="_blank"
-                            class="btn btn-block mb-2 deep_hover"
-                            style="text-decoration: none;  background-color: #25D366; color: #FFF;  border-radius: 4px;"><i
-                                class="fa fa-whatsapp mr-2"></i>WhatsApp</a>
+                        <div class="installation-step">
+                            <div class="d-flex align-items-start">
+                                <div style="background: var(--secondary-color); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Generate API Key</h5>
+                                    <p class="mb-2">Navigate to API menu and generate your unique API key</p>
+                                    <small class="text-muted">Keep this key secure and private</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="installation-step">
+                            <div class="d-flex align-items-start">
+                                <div style="background: var(--secondary-color); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">
+                                    <i class="fa fa-cog"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Configure API Settings</h5>
+                                    <p class="mb-2">In Odoo: Settings → SMS Settings → Add your API key</p>
+                                    <small class="text-muted">Path: Config → SMS Settings</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="installation-step">
+                            <div class="d-flex align-items-start">
+                                <div style="background: var(--secondary-color); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0;">
+                                    <i class="fa fa-id-badge"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">Set Sender ID</h5>
+                                    <p class="mb-2">Configure "RoyceLTD" as your default sender ID</p>
+                                    <small class="text-muted">Path: Config → Sender ID Settings</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mt-5 mb-4" style="color: var(--primary-color);">User Permissions</h3>
+                <div class="alert-info">
+                    <strong><i class="fa fa-shield-alt mr-2"></i>Security Setup:</strong>
+                    Configure user access by assigning appropriate groups under 
+                    <strong>Settings → Users & Companies → Groups</strong>
+                </div>
+                <div class="screenshot-container">
+                    <img src="assets/groups.png" alt="User Groups Configuration" style="max-height: 300px;">
+                    <small class="text-muted d-block">User permission groups configuration</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage & API Section -->
+        <div class="row" id="usage">
+            <div class="col-12">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fa fa-code"></i>Usage & API Documentation
+                    </h2>
+                </div>
+
+                <h3 class="mb-4" style="color: var(--primary-color);">Programmatic SMS Sending</h3>
+                <p>Integrate SMS functionality into any Odoo model using the following API:</p>
+
+                <div class="code-block">
+<span class="comment"># Example: Send SMS from any Odoo model</span>
+<span class="keyword">sms_log</span> = <span class="keyword">self</span>.env[<span class="string">'royce.sms.log'</span>]
+<span class="keyword">result</span> = sms_log.send_sms(
+    phone_number=<span class="string">recipient_phone</span>,        <span class="comment"># Required: Phone number with country code</span>
+    message=<span class="string">message</span>,                      <span class="comment"># Required: SMS content</span>
+    recipient_name=<span class="string">recipient_name</span>,        <span class="comment"># Optional: Recipient display name</span>
+    template_id=<span class="keyword">None</span>,                    <span class="comment"># Optional: Royce template ID</span>
+    recipient_type=<span class="string">'notification'</span>,        <span class="comment"># Optional: Message category</span>
+    recipient_id=context_data.get(<span class="string">'related_record_id'</span>)  <span class="comment"># Optional: Related record ID</span>
+)
+
+<span class="comment"># Handle response</span>
+<span class="keyword">if</span> result.get(<span class="string">'success'</span>):
+    <span class="comment"># SMS sent successfully</span>
+    message_id = result.get(<span class="string">'message_id'</span>)
+    _logger.info(<span class="string">f"SMS sent successfully: {message_id}"</span>)
+<span class="keyword">else</span>:
+    <span class="comment"># Handle error</span>
+    error_message = result.get(<span class="string">'error'</span>)
+    _logger.error(<span class="string">f"SMS sending failed: {error_message}"</span>)
+                </div>
+
+                <h3 class="mt-5 mb-4" style="color: var(--primary-color);">API Parameters</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>phone_number</code></td>
+                                <td>String</td>
+                                <td><span class="badge badge-danger">Yes</span></td>
+                                <td>Recipient phone number with country code (e.g., +254712345678)</td>
+                            </tr>
+                            <tr>
+                                <td><code>message</code></td>
+                                <td>String</td>
+                                <td><span class="badge badge-danger">Yes</span></td>
+                                <td>SMS message content (max 160 characters for single SMS)</td>
+                            </tr>
+                            <tr>
+                                <td><code>recipient_name</code></td>
+                                <td>String</td>
+                                <td><span class="badge badge-secondary">No</span></td>
+                                <td>Display name for the recipient</td>
+                            </tr>
+                            <tr>
+                                <td><code>template_id</code></td>
+                                <td>Integer</td>
+                                <td><span class="badge badge-secondary">No</span></td>
+                                <td>ID of predefined Royce SMS template</td>
+                            </tr>
+                            <tr>
+                                <td><code>recipient_type</code></td>
+                                <td>String</td>
+                                <td><span class="badge badge-secondary">No</span></td>
+                                <td>Message category for filtering (e.g., 'notification', 'marketing')</td>
+                            </tr>
+                            <tr>
+                                <td><code>recipient_id</code></td>
+                                <td>Integer</td>
+                                <td><span class="badge badge-secondary">No</span></td>
+                                <td>Related record ID for tracking</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="mt-5 mb-4" style="color: var(--primary-color);">Advanced Usage Examples</h3>
+                
+                <h5 class="mb-3">Bulk SMS to Customers</h5>
+                <div class="code-block">
+<span class="comment"># Send promotional SMS to all customers</span>
+<span class="keyword">customers</span> = <span class="keyword">self</span>.env[<span class="string">'res.partner'</span>].search([
+    (<span class="string">'is_company'</span>, <span class="string">'='</span>, <span class="keyword">False</span>),
+    (<span class="string">'mobile'</span>, <span class="string">'!='</span>, <span class="keyword">False</span>)
+])
+
+<span class="keyword">sms_log</span> = <span class="keyword">self</span>.env[<span class="string">'royce.sms.log'</span>]
+<span class="keyword">for</span> customer <span class="keyword">in</span> customers:
+    message = <span class="string">f"Hello {customer.name}, check out our latest offers!"</span>
+    sms_log.send_sms(
+        phone_number=customer.mobile,
+        message=message,
+        recipient_name=customer.name,
+        recipient_type=<span class="string">'marketing'</span>,
+        recipient_id=customer.id
+    )
+                </div>
+
+                <h5 class="mb-3 mt-4">Order Status Notifications</h5>
+                <div class="code-block">
+<span class="comment"># Notify customer about order status change</span>
+<span class="keyword">def</span> notify_order_status(<span class="keyword">self</span>):
+    <span class="keyword">if</span> <span class="keyword">self</span>.partner_id.mobile:
+        message = <span class="string">f"Order {self.name} status updated to {self.state}"</span>
+        
+        <span class="keyword">self</span>.env[<span class="string">'royce.sms.log'</span>].send_sms(
+            phone_number=<span class="keyword">self</span>.partner_id.mobile,
+            message=message,
+            recipient_name=<span class="keyword">self</span>.partner_id.name,
+            recipient_type=<span class="string">'notification'</span>,
+            recipient_id=<span class="keyword">self</span>.id
+        )
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshots Section -->
+        <div class="row" id="screenshots">
+            <div class="col-12">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fa fa-images"></i>Screenshots
+                    </h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="screenshot-container">
+                            <h5 style="color: var(--primary-color);">Customer SMS Interface</h5>
+                            <img src="assets/send-to-customers.png" alt="Send SMS to Customers" style="max-height: 400px;">
+                            <small class="text-muted d-block">Easy-to-use interface for sending SMS to customers</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="screenshot-container">
+                            <h5 style="color: var(--primary-color);">Bulk SMS Composer</h5>
+                            <img src="assets/send bulk sms.png" alt="Bulk SMS Interface" style="max-height: 400px;">
+                            <small class="text-muted d-block">Compose and send bulk SMS messages</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="screenshot-container">
+                            <h5 style="color: var(--primary-color);">SMS Outbox</h5>
+                            <img src="assets/outbox.png" alt="SMS Outbox" style="max-height: 300px;">
+                            <small class="text-muted d-block">Track and manage sent SMS messages</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="screenshot-container">
+                            <h5 style="color: var(--primary-color);">SMS Templates</h5>
+                            <img src="assets/template.png" alt="SMS Templates" style="max-height: 300px;">
+                            <small class="text-muted d-block">Create and manage reusable SMS templates</small>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- End of Contact Cards -->
-    </section>
+
+        <!-- Support Section -->
+        <div class="row" id="support">
+            <div class="col-12">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fa fa-life-ring"></i>Support & Contact
+                    </h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        <a href="mailto:info@roycetechnologies.co.ke" class="contact-card">
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-envelope fa-2x mr-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Email Support</h5>
+                                    <p class="mb-0">info@roycetechnologies.co.ke</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <a href="https://api.whatsapp.com/send?phone=254713727937" target="_blank" class="contact-card whatsapp-card">
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-whatsapp fa-2x mr-3"></i>
+                                <div>
+                                    <h5 class="mb-1">WhatsApp Support</h5>
+                                    <p class="mb-0">+254 713 727 937</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert-info mt-4">
+                    <strong><i class="fa fa-clock mr-2"></i>Support Hours:</strong>
+                    Monday to Friday, 8:00 AM - 6:00 PM (EAT). We typically respond within 4-6 hours during business hours.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <section class="oe_container" style="padding: 2rem 3rem 1rem;">
-        <div class="row" style="max-width:1540px; margin: 0 auto; margin-right: 3rem; ">
-            <!-- Logo -->
-            <div class="col-lg-12 d-flex justify-content-center align-items-center" style="margin-top: 3rem;">
-                <img src="royce-name.jpeg" width="200px" height="auto" />
-            </div>
-            <!-- End of Logo -->
-            <div class="col-lg-12">
-                <hr
-                    style="margin-top: 3rem;background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(229,229,229,1) 33%, rgba(229,229,229,1) 58%, rgba(0,212,255,0) 100%); height: 2px; border-style: none;">
-                <!-- End of Footer Section -->
+    <footer class="container-fluid" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 3rem 0 2rem;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <img src="royce-name.jpeg" style="width: 200px; height: auto; margin-bottom: 2rem;" alt="Royce Technologies">
+                    <hr style="background: linear-gradient(90deg, transparent 0%, #ccc 50%, transparent 100%); height: 2px; border: none; margin: 2rem 0;">
+                    <p class="text-muted">
+                        &copy; 2024 Royce Technologies. Professional Odoo solutions and SMS integration services.
+                    </p>
+                </div>
             </div>
         </div>
-    </section>
-    <!-- END OF FOOTER -->
+    </footer>
 
-</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation for external links
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                this.innerHTML += ' <i class="fa fa-spinner fa-spin ml-1"></i>';
+            });
+        });
+    </script>
+</body>
+</html>

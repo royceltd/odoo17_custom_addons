@@ -15,5 +15,31 @@
             <field name="user_id" ref="base.user_admin"/>
         </record>
 
+        <!-- NEW: Cron Job for Checking Delayed Deliveries -->
+        <record id="royce_cron_check_delayed_deliveries" model="ir.cron">
+            <field name="name">Royce: Check Delayed Deliveries for SMS Notifications</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="state">code</field>
+            <field name="code">model._check_delayed_deliveries()</field>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- NEW: Cron Job for Checking Overdue Quotations (Optional) -->
+        <record id="royce_cron_check_overdue_quotations" model="ir.cron">
+            <field name="name">Royce: Check Overdue Quotations for Follow-up</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model._check_overdue_quotations()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">False</field>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
     </data>
 </odoo>

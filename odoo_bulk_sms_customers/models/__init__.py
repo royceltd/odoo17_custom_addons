@@ -8,3 +8,5 @@ from . import royce_partner_extension
 from . import royce_invoice_extension
 from . import royce_payment_extension
 from . import royce_purchase_extension
+from . import royce_sale_order_extension
+from . import royce_stock_picking_extension    # NEW
