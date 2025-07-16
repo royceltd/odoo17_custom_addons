@@ -19,7 +19,7 @@
     ''',
     'author': 'Royce Technologies Ltd',
     'website': 'https://roycetechnologies.co.ke',
-    'depends': ['base', 'contacts', 'sale', 'purchase', 'odoo_bulk_sms_kenya','account'],
+    'depends': ['base', 'contacts', 'sale_management', 'purchase', 'odoo_bulk_sms_kenya','account'],
     'data': [
         'security/customer_sms_security.xml',
         'security/ir.model.access.csv',
